@@ -1,21 +1,94 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>excelexport.js</title>
-	<script src="excelexport.js"></script>
+<meta charset="UTF-8">
+<title>excelexport.js</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap-clrs.css">
+<link rel="stylesheet" href="assets/geomicons/geomicons.css">
+<link rel="stylesheet" href="assets/global.css">
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 <body>
-<table id="table1">
-	<tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th></tr>
-	<tr><td>100</td><td>200</td><td>300</td><td>400</td></tr>
-	<tr><td>10,00</td><td>20"00</td><td>30
-00</td><td>40<br>00</td></tr>
-	<tr><td colspan="2">10000</td><td>30,0"00</td><td>40000</td></tr>
+
+<div class="container content">
+<div class="jumbotron">
+<h1>excelexport.js</h1>
+<p>Export your <code>&lt;table&gt;</code> to CSV or XLS, within your browser (or another external script).</p>
+<p><a href="https://github.com/Snack-X/excelexport.js" class="btn btn-primary btn-lg">Browse GitHub</a></p>
+</div>
+</div>
+
+<hr>
+
+<div class="container example">
+<h1>Examples</h1>
+
+<table class="table table-bordered" id="content-table">
+<thead>
+<tr>
+<th>No.</th>
+<th>Column 1</th>
+<th>Column 2</th>
+<th>Column 3</th>
+<th>Column 4</th>
+<th>Column 5</th>
+<th>Column 6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Value 1-1</td>
+<td>Value 1-2</td>
+<td>Value 1-3</td>
+<td>Value 1-4</td>
+<td>Value 1-5</td>
+<td>Value 1-6</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Value 2-1</td>
+<td>Value 2-2</td>
+<td colspan="3">Value 2-3 ~ 2-5</td>
+<td>Value 2-6</td>
+</tr>
+<tr>
+<td>3</td>
+<td colspan="2">Value 3-1 ~ 3-2</td>
+<td>Value 3-3</td>
+<td>Value 3-4</td>
+<td>Value 3-5</td>
+<td>Value 3-6</td>
+</tr>
+</tbody>
 </table>
-<button onclick="location.href = excelExport('table1').parseToCSV().getCSVDataURI()">Download to CSV via data URI</button><br>
-<button onclick="excelExport('table1').parseToCSV().downloadCSV('http://korsnack.kr/excelexport/download.php', 'excelexport.csv')">Download to CSV via external script</button><br>
-<button onclick="location.href = excelExport('table1').parseToXLS('excelexport sheet').getXLSDataURI()">Download to XLS via data URI</button><br>
-<button onclick="excelExport('table1').parseToXLS().downloadXLS('http://korsnack.kr/excelexport/download.php', 'excelexport.xls')">Download to XLS via external script</button>
+<div class="text-center">
+<a class="btn btn-lg btn-success dl-csv">Download as .CSV</a>
+<a class="btn btn-lg btn-info dl-csv-ext">Download as .CSV w/ external script</a>
+<a class="btn btn-lg btn-success dl-xls">Download as .XLS</a>
+<a class="btn btn-lg btn-info dl-xls-ext">Download as .XLS w/ external script</a>
+</div>
+</div>
+
+<hr>
+
+<footer>
+<div class="container">
+<p>2014 &copy; Snack (Jaemin Noh)</p>
+<a href="https://twitter.com/Snack_X"><span class="geomicon fill-gray" data-id="twitter"></span></a>
+<a href="https://github.com/Snack-X"><span class="geomicon fill-gray" data-id="github"></span></a>
+</div>
+</footer>
+
+<script src="assets/jquery-2.1.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/geomicons/geomicons.min.js"></script>
+<script src="assets/excelexport.js"></script>
+<script src="assets/index.js"></script>
+
 </body>
 </html>

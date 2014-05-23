@@ -1,0 +1,15 @@
+.geomicon {
+	width: 2em;
+	height: 2em;
+	margin: 0 0.5em;
+}
+
+.geomicon-small {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.125em;
+}
+
+.fill-gray {
+	fill: #aaaaaa;
+}
