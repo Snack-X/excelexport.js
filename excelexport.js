@@ -1,3 +1,10 @@
+/**
+ * excelexport.js v0.1.0
+ * https://github.com/Snack-X/excelexport.js
+ * Licensed under MIT License.
+ */
+
+// base64 encode fallback
 if(!window.btoa) {
 	window.btoa = function(string) {
 		var a, b, b1, b2, b3, b4, c, i = 0, len = string.length, max = Math.max, result = "", charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -18,10 +25,26 @@ if(!window.btoa) {
 	};
 }
 
+/**
+ * excelexport constructor
+ * @constructor
+ * @param  {string}  element_id  id of <table> element
+ * @return {Object}              excelExport object itself
+ */
 excelExport = (function(element_id) {
 	var table = document.getElementById(element_id);
 	var data_csv, data_xls;
 
+	var data_uri_prefix = {
+		csv: "data:application/csv;base64,",
+		xls: "data:application/vnd.ms-excel;base64,"
+	};
+
+	/**
+	 * create <form> element to send POST request
+	 * @param  {string}           action  URL of external script
+	 * @return {HTMLFormElement}          <form> element
+	 */
 	var create_form_dom = function(action) {
 		var el = document.createElement("form");
 		el.method = "POST";
@@ -30,6 +53,12 @@ excelExport = (function(element_id) {
 		return el;
 	};
 
+	/**
+	 * create hidden <input> element
+	 * @param   {string}            data  value of <input> element
+	 * @param   {string}            name  name of <input> element
+	 * @return  {HTMLInputElement}        <input> element
+	 */
 	var create_input_dom = function(data, name) {
 		var el = document.createElement("input");
 		el.type = "hidden";
@@ -39,6 +68,13 @@ excelExport = (function(element_id) {
 		return el;
 	};
 
+	/**
+	 * download file using external script
+	 * @param  {string}  server    URL of external script
+	 * @param  {string}  type      file type of data (csv or xls)
+	 * @param  {string}  data      data of file
+	 * @param  {string}  filename  name of file
+	 */
 	var download_file = function(server, type, data, filename) {
 		var el_form = create_form_dom(server);
 		var el_type = create_input_dom(type, "type");
@@ -49,7 +85,22 @@ excelExport = (function(element_id) {
 		el_form.submit();
 	};
 
+	/**
+	 * get full data URI
+	 * @param  {string}  type  type of data (csv or xls)
+	 * @param  {string}  data  data
+	 * @return {string}        full data URI
+	 */
+	var get_data_uri = function(type, data) {
+		return data_uri_prefix[type] + window.btoa(unescape(encodeURIComponent(data)));
+	};
+
 	var exports = {
+
+		/**
+		 * parse table to csv data
+		 * @return  {object}  excelExport object itself
+		 */
 		parseToCSV: function() {
 			var data = [];
 
@@ -84,21 +135,39 @@ excelExport = (function(element_id) {
 			data_csv = data.join("\n");
 			return this;
 		},
+		/**
+		 * get raw csv data
+		 * @return  {string}  raw csv data
+		 */
 		getRawCSV: function() {
 			if(!data_csv) return false;
 
 			return data_csv;
 		},
+		/**
+		 * get data URI of csv data
+		 * @return  {string}  data URI
+		 */
 		getCSVDataURI: function() {
 			if(!data_csv) return false;
 
-			return "data:application/csv;base64," + window.btoa(unescape(encodeURIComponent(data_csv)));
+			return get_data_uri("csv", data_csv);
 		},
+		/**
+		 * download csv file using external script
+		 * @param   {string}  server    URL of external script
+		 * @param   {string}  filename  name of csv file (extension's not included)
+		 */
 		downloadCSV: function(server, filename) {
 			if(!data_csv) return false;
 
 			download_file(server, "csv", data_csv, filename);
 		},
+		/**
+		 * parse table to xls data
+		 * @param   {string}  name of sheet which contains data
+		 * @return  {object}  excelExport object itself
+		 */
 		parseToXLS: function(sheet_name) {
 			if(!sheet_name) sheet_name = "Sheet";
 
@@ -108,16 +177,29 @@ excelExport = (function(element_id) {
 
 			return this;
 		},
+		/**
+		 * get raw xls data
+		 * @return  {string}  raw xls data
+		 */
 		getRawXLS: function() {
 			if(!data_xls) return false;
 
 			return data_xls;
 		},
+		/**
+		 * get data URI of xls data
+		 * @return  {string}  data URI
+		 */
 		getXLSDataURI: function() {
 			if(!data_xls) return false;
 
-			return "data:application/vnd.ms-excel;base64," + window.btoa(unescape(encodeURIComponent(data_xls)));
+			return get_data_uri("xls", data_xls);
 		},
+		/**
+		 * download xls file using external script
+		 * @param   {string}  server    URL of external script
+		 * @param   {string}  filename  name of xls file (extension's not included)
+		 */
 		downloadXLS: function(server, filename) {
 			if(!data_xls) return false;
 
