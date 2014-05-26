@@ -1,5 +1,5 @@
 /**
- * excelexport.js v0.1.0
+ * excelexport.js v0.1.1
  * https://github.com/Snack-X/excelexport.js
  * Licensed under MIT License.
  */
@@ -81,7 +81,12 @@ excelExport = (function(element_id) {
 		var el_data = create_input_dom(data, "data");
 		var el_file = create_input_dom(filename, "filename");
 
-		el_form.innerHTML = el_data.outerHTML + el_file.outerHTML;
+		el_form.appendChild(el_type);
+		el_form.appendChild(el_data);
+		el_form.appendChild(el_file);
+
+		document.body.appendChild(el_form);
+
 		el_form.submit();
 	};
 

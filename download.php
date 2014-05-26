@@ -1,6 +1,6 @@
 <?php
 /**
- * excelexport.js v0.1.0
+ * excelexport.js v0.1.1
  * https://github.com/Snack-X/excelexport.js
  * Licensed under MIT License.
  */
