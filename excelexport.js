@@ -28,8 +28,8 @@ if(!window.btoa) {
 /**
  * excelexport constructor
  * @constructor
- * @param  {string}  element_id  id of <table> element
- * @return {Object}              excelExport object itself
+ * @param   {string}  element_id  id of <table> element
+ * @return  {Object}              excelExport object itself
  */
 excelExport = (function(element_id) {
 	var table = document.getElementById(element_id);
@@ -42,8 +42,8 @@ excelExport = (function(element_id) {
 
 	/**
 	 * create <form> element to send POST request
-	 * @param  {string}           action  URL of external script
-	 * @return {HTMLFormElement}          <form> element
+	 * @param   {string}           action  URL of external script
+	 * @return  {HTMLFormElement}          <form> element
 	 */
 	var create_form_dom = function(action) {
 		var el = document.createElement("form");
@@ -135,6 +135,7 @@ excelExport = (function(element_id) {
 			data_csv = data.join("\n");
 			return this;
 		},
+
 		/**
 		 * get raw csv data
 		 * @return  {string}  raw csv data
@@ -144,6 +145,7 @@ excelExport = (function(element_id) {
 
 			return data_csv;
 		},
+
 		/**
 		 * get data URI of csv data
 		 * @return  {string}  data URI
@@ -153,6 +155,7 @@ excelExport = (function(element_id) {
 
 			return get_data_uri("csv", data_csv);
 		},
+
 		/**
 		 * download csv file using external script
 		 * @param   {string}  server    URL of external script
@@ -163,6 +166,7 @@ excelExport = (function(element_id) {
 
 			download_file(server, "csv", data_csv, filename);
 		},
+
 		/**
 		 * parse table to xls data
 		 * @param   {string}  name of sheet which contains data
@@ -177,6 +181,7 @@ excelExport = (function(element_id) {
 
 			return this;
 		},
+
 		/**
 		 * get raw xls data
 		 * @return  {string}  raw xls data
@@ -186,6 +191,7 @@ excelExport = (function(element_id) {
 
 			return data_xls;
 		},
+
 		/**
 		 * get data URI of xls data
 		 * @return  {string}  data URI
@@ -195,6 +201,7 @@ excelExport = (function(element_id) {
 
 			return get_data_uri("xls", data_xls);
 		},
+
 		/**
 		 * download xls file using external script
 		 * @param   {string}  server    URL of external script
@@ -205,6 +212,7 @@ excelExport = (function(element_id) {
 
 			download_file(server, "xls", data_xls, filename);
 		}
+
 	};
 
 	return exports;
