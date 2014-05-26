@@ -2,6 +2,10 @@
 
 Export your `<table>` to CSV or XLS, within your browser (or another external script).
 
+## Demo
+
+http://snack-x.github.io/excelexport.js/
+
 ## Usage
 
 ```html
